@@ -1,5 +1,5 @@
-from core.math_ops import square_sum
+from core.math_ops import squared_norm
 
-def test_square_sum():
-    result = square_sum(3, 4)
+def test_squared_norm():
+    result = squared_norm(3, 4)
     assert result == 25
