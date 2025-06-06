@@ -19,11 +19,17 @@ class Order:
 
 
 def calculate_discount(order: Dict) -> float:
+    is_vip = order["customer_type"] == "VIP"
+    is_large_order = order["amount"] > 1000 and order["items"] > 5
+    is_regular = order["customer_type"] == "Regular"
+    is_medium_order = order["amount"] > 500
+
     logger.debug(f"Evaluating discount for: {order}")
-    if order["customer_type"] == "VIP" and order["amount"] > 1000 and order["items"] > 5:
+
+    if is_vip and is_large_order:
         logger.info("VIP large order discount applied.")
         return order["amount"] * 0.9
-    elif order["customer_type"] == "Regular" and order["amount"] > 500:
+    elif is_regular and is_medium_order:
         logger.info("Regular medium order discount applied.")
         return order["amount"] * 0.95
     else:
